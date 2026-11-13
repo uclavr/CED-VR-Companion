@@ -44,7 +44,7 @@ These modifications are available in our [CEDVR-compatible iSpy Analyzers fork](
 
 #### AOD: ECAL Crystal Segmentation
 
-The segmentation of the Electromagnetic Calorimeter (ECAL) differs from that of the Hadronic Calorimeter (HCAL). In the ECAL Barrel (EB) region ($|\eta| < 1.479$), ECAL crystals are arranged in a fixed granularity of $\Delta\eta \times \Delta\phi \approx 0.0174 \times 0.0174$. Up to HCAL tower 17, the ECAL crystals can even be grouped into $5 \times 5$ “trigger towers’’ that align naturally with the HCAL tower boundaries. Beyond this region however, is the ECAL Endcap (EE), where the ECAL granularity starts to vary and no longer matches the HCAL segmentation one-to-one.
+The segmentation of the Electromagnetic Calorimeter (ECAL) differs from that of the Hadronic Calorimeter (HCAL). In the ECAL Barrel (EB) region ($|\eta| < 1.479$), ECAL crystals are arranged in a fixed granularity of $\Delta\eta \times \Delta\phi \approx 0.0174 \times 0.0174$. Up to HCAL tower 17, the ECAL crystals can even be grouped into $5 \times 5$ “trigger towers’’ that align naturally with the HCAL tower boundaries. Beyond this region however, is the ECAL Endcap (EE), where the ECAL crystal granularity starts to vary and no longer aligns directly with HCAL segmentation.
 
 Since AOD provides individual ECAL rechits, CEDVR can visualize energy deposits at crystal-level granularity. To correctly represent the variable segmentation in the EE region, we modified `ISpyEERecHit.cc` to use CMSSW's `CaloSubdetectorGeometry` interface to determine the approximate $\Delta\eta$ and $\Delta\phi$ associated with each individual EE crystal.
 
@@ -104,6 +104,6 @@ The modifications were written for CMSSW version 15.0.16. Compatibility with old
    scram b -j 4
    ```
 
-After rebuilding, generate `.ig` files using an appropriate AOD or MiniAOD configuration -- make sure that the corresponding analyzers are enabled!
+After rebuilding, generate `.ig` files using an appropriate AOD or MiniAOD configuration -- make sure that the corresponding analyzers are selected!
 
 The generated `.ig` files can then be processed by the CEDVR Companion parser and visualized in CEDVR.
