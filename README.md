@@ -46,7 +46,7 @@ These modifications are available in our [CEDVR-compatible iSpy Analyzers fork](
 
 The segmentation of the Electromagnetic Calorimeter (ECAL) differs from that of the Hadronic Calorimeter (HCAL). In the ECAL Barrel (EB) region ($|\eta| < 1.479$), ECAL crystals are arranged in a fixed granularity of $\Delta\eta \times \Delta\phi \approx 0.0174 \times 0.0174$. Up to HCAL tower 17, the ECAL crystals can even be grouped into $5 \times 5$ “trigger towers’’ that align naturally with the HCAL tower boundaries. Beyond this region however, is the ECAL Endcap (EE), where the ECAL granularity starts to vary and no longer matches the HCAL segmentation one-to-one.
 
-Since AOD provides individual ECAL rechits, CEDVR can visualize energy deposits at crystal-level granularity. To correctly represent the variable segmentation in the EE region, we modified `ISpyEERecHit.cc` to use CMSSW's `CaloSubdetectorGeometry` interface to obtain the effective $\Delta\eta$ and $\Delta\phi$ associated with each individual EE crystal.
+Since AOD provides individual ECAL rechits, CEDVR can visualize energy deposits at crystal-level granularity. To correctly represent the variable segmentation in the EE region, we modified `ISpyEERecHit.cc` to use CMSSW's `CaloSubdetectorGeometry` interface to determine the approximate $\Delta\eta$ and $\Delta\phi$ associated with each individual EE crystal.
 
 These values are stored as additional properties in the `EERecHits_V2` collection of the generated `.ig` files, allowing CEDVR to render EE energy deposits with the appropriate dimensions. For EB rechits, CEDVR simply uses the fixed crystal granularity instead.
 
@@ -56,7 +56,7 @@ Unlike AOD, MiniAOD does not retain the complete collection of individual ECAL c
 
 This analyzer associates packed candidates with calorimeter regions and exports their geometry, including the coordinates of their corners.
 
-We extended `ISpyPackedCandidate.cc` to calculate the effective $\Delta\eta$ and $\Delta\phi$ of these calorimeter regions from the $\eta$ and $\phi$ coordinates of their representative corners. These values are stored as additional properties in the existing `EcalTowers_V1` and `HcalTowers_V1` collections of the generated `.ig` files.
+We extended `ISpyPackedCandidate.cc` to estimate the $\Delta\eta$ and $\Delta\phi$ of these calorimeter regions from the $\eta$ and $\phi$ coordinates of their geometric corners. These values are stored as additional properties in the existing `EcalTowers_V1` and `HcalTowers_V1` collections of the generated `.ig` files.
 
 CEDVR uses these values to determine the dimensions of the corresponding energy deposits in its LEGO plots.
 
