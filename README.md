@@ -38,6 +38,9 @@ CED VR Companion accepts 1 argument (the path to your '.ig' file) when being cal
 
 CED VR Companion utilizes the Android Debug Bridge to communicate with Oculus devices. Please make sure your Oculus Quest device is connected with developer mode enabled before running the companion. ADB is already installed with the executable and is located in platform-tools. The program uses a hardcoded path to platform-tools/adb so do not move this folder around.  
 
+### Surfaces in Unity
+By default, Unity only draws each face of a mesh from one side whose orientation is set by the winding order of its vertices. As such, faces seen from behind are culled and not drawn. However, even if this culling is turned off, these faces can have incorrect lighting due to the orientation of their surface normals. To ensure proper visibility and lighting from both sides, CED VR Companion duplicates each face in the generated OBJ files with its vertex winding order reversed.
+
 ### ISpy Analyzer & Generation of IG Files
 To visualize energies registered by the CMS's Electromagnetic Calorimeter (ECAL) in the Endcap regions (EE) within LEGO plots, users must create .ig files using our modified ISpy Analyzer file (ISpyEERecHit.cc) which has been updated to include calorimeter segmentation data for the EE regions.
 
